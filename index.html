@@ -454,7 +454,6 @@
             color: #E8D8B6;
         }
         
-        /* Warning box stilius iš kito failo */
         .warning-box {
             background: rgba(140, 44, 44, 0.7);
             border: 3px solid #ff6b6b;
@@ -470,6 +469,18 @@
         .warning-box strong {
             color: #ffcccb;
             font-size: 1.2em;
+        }
+
+        .notice-box {
+            background: rgba(44, 95, 140, 0.35);
+            border: 2px solid #5b9bd5;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+            color: #E8D8B6;
+        }
+        .notice-box strong {
+            color: #a8d4ff;
         }
     </style>
 </head>
@@ -487,20 +498,18 @@
                 
                 <div class="header-content">
                     <h1>AI INFLUENCE TUTORIALS</h1>
-                    <p class="subtitle">Mount & Blade II: Bannerlord — Complete Tutorials & FAQ Compendium</p>
+                    <p class="subtitle">Mount &amp; Blade II: Bannerlord — Complete Tutorials &amp; FAQ Compendium</p>
                     <p>Master the AI Influence Mod • From Beginner to Advanced Roleplay</p>
                 </div>
                 <div class="badge">v3.3.7 • Updated: January 2026</div>
             </div>
         </header>
         
-        <!-- Warning Box -->
         <div class="warning-box">
-            <strong>⚠️ IMPORTANT WARNING:</strong> AI Influence is designed to work with Vanilla Mount & Blade II: Bannerlord.
+            <strong>⚠️ IMPORTANT WARNING:</strong> AI Influence is designed to work with Vanilla Mount &amp; Blade II: Bannerlord.
             If you experience crashes or issues, these are likely caused by compatibility problems with other mods. We do NOT provide support for mod compatibility issues - this is the user's responsibility.
         </div>
         
-        <!-- Table of Contents -->
         <div class="section">
             <h2 class="section-title">📚 Table of Contents</h2>
             <div class="toc">
@@ -518,15 +527,14 @@
                     <li><a href="#rollback-ai">Rollback AI Actions</a></li>
                     <li><a href="#json-editing">Editing NPC .JSON Files</a></li>
                     <li><a href="#diplomacy">Diplomacy System Guide</a></li>
-                    <li><a href="#action-rules">NPC Action System & Rules</a></li>
-                    <li><a href="#technical-guide">Technical Guide & File Structure</a></li>
+                    <li><a href="#action-rules">NPC Action System &amp; Rules</a></li>
+                    <li><a href="#technical-guide">Technical Guide &amp; File Structure</a></li>
                 </ul>
             </div>
         </div>
         
         <div class="divider"></div>
         
-        <!-- Installation Guide -->
         <div class="section" id="installation">
             <h2 class="section-title"><span class="icon">📦</span> Installation Guide</h2>
             
@@ -545,9 +553,7 @@
                 
                 <div class="step">
                     <strong>Step 2: Extract to Modules Folder</strong>
-                    <div class="code-block">
-Mount & Blade II Bannerlord/Modules
-                    </div>
+                    <div class="code-block">Mount &amp; Blade II Bannerlord/Modules</div>
                 </div>
                 
                 <div class="step">
@@ -565,24 +571,35 @@ Mount & Blade II Bannerlord/Modules
                 
                 <div class="step">
                     <strong>Step 4: Load Order Example</strong>
-                    <div class="code-block">
-1) Harmony
+                    <div class="code-block">1) Harmony
 2) ButterLib
 3) UIExtenderEx
 4) MCM
-5) AIInfluence ✅
-                    </div>
+5) AIInfluence ✅</div>
                 </div>
                 
                 <div class="step">
                     <strong>Step 5: Supported Versions</strong>
-                    <p>Bannerlord 1.3.9 - 1.3.13</p>
+                    <p>Bannerlord 1.3.13 – 1.3.15</p>
+                    <div class="warning">
+                        <strong>⚠️ Bannerlord 1.4 Beta is NOT supported.</strong>
+                        The mod has not been tested on the 1.4 beta branch and compatibility is not guaranteed. Stay on the stable 1.3.x line for a working experience.
+                    </div>
                 </div>
             </div>
             
             <div class="tutorial-card" id="free-local-ai">
                 <h3><span class="icon">🆓</span> Free Local AI - Player2 Setup</h3>
-                
+
+                <div class="warning-box" style="margin: 0 0 20px 0; text-align: left; font-size: 1em;">
+                    <strong>⚠️ Local LLM / Offline AI models are NOT recommended for AI Influence.</strong><br>
+                    Local models (Ollama, KoboldCpp, LM Studio, etc.) are generally too weak for the complexity of AI Influence's prompts — NPCs will behave poorly, give short/broken responses, ignore actions, and provide an overall degraded experience.
+                </div>
+
+                <div class="notice-box">
+                    <strong>💡 A note on free AI models:</strong> There is currently no reliable, permanently free AI model that performs well enough for AI Influence. Free-tier options occasionally appear temporarily but are either rate-limited, low-quality, or discontinued quickly. For a proper experience, a paid API key or a Player2 subscription is required.
+                </div>
+
                 <div class="step">
                     <strong>1. Download Player2:</strong>
                     <p><a href="https://player2.game/" target="_blank">https://player2.game/</a></p>
@@ -602,40 +619,48 @@ Mount & Blade II Bannerlord/Modules
                         <li>API Key: leave empty ✅</li>
                     </ul>
                 </div>
+
+                <div class="warning">
+                    <strong>⚠️ Minimum model requirement when using Player2:</strong>
+                    Anything cheaper / weaker than <strong>DeepSeek V3 (3.2)</strong> will NOT run AI Influence at full functionality. NPCs may ignore diplomacy actions, produce low-quality dialogue, or fail to process complex instructions. Always select at least <strong>DeepSeek V3 / 3.2</strong> or an equivalent-tier model inside the Player2 model selector.
+                </div>
             </div>
             
             <div class="tutorial-card">
                 <h3><span class="icon">🌐</span> Other Supported AI Providers</h3>
+
+                <div class="notice-box" style="margin-bottom: 20px;">
+                    <strong>ℹ️ Recommended providers are cloud-based.</strong> Local LLM solutions (Ollama, KoboldCpp) are listed for completeness but are <strong>not recommended</strong> — they typically lack the reasoning capacity needed for AI Influence's diplomacy, action chains, and dynamic event systems. Expect degraded NPC behaviour.
+                </div>
                 
                 <div class="feature-grid">
                     <div class="feature-card">
                         <h3><span class="icon">⭐</span> OpenRouter</h3>
-                        <p>GPT-4, Claude, Gemini, etc.</p>
-                        <p><strong>✅ Best quality, requires API key</strong></p>
+                        <p>DeepSeek, GLM, and many other models</p>
+                        <p><strong>✅ Good quality, requires API key</strong></p>
                     </div>
                     
                     <div class="feature-card">
                         <h3><span class="icon">💻</span> Ollama</h3>
                         <p>Local LLMs</p>
-                        <p><strong>✅ Free & offline, supports many models</strong></p>
+                        <p><strong>⚠️ Not recommended — local models too weak for full functionality</strong></p>
                     </div>
                     
                     <div class="feature-card">
                         <h3><span class="icon">🖥️</span> KoboldCpp</h3>
                         <p>Local AI chat models</p>
-                        <p><strong>✅ Good for lower-end PCs</strong></p>
+                        <p><strong>⚠️ Not recommended — local models too weak for full functionality</strong></p>
                     </div>
                 </div>
                 
                 <div class="step">
                     <strong>How to Switch Models:</strong>
                     <p>MCM → AI Backend → Select provider → Enter API URL and Key if required</p>
-                    <p class="success"><strong>Tip:</strong> Better AI models = smarter characters</p>
+                    <p class="success"><strong>Tip:</strong> Better AI models = smarter characters. Never use cheap or free-tier models if you want the full experience.</p>
                 </div>
             </div>
         </div>
         
-        <!-- DeepSeek API Guide -->
         <div class="section" id="deepseek-api">
             <h2 class="section-title"><span class="icon">🔌</span> DeepSeek API Setup</h2>
             
@@ -672,7 +697,6 @@ Mount & Blade II Bannerlord/Modules
             </div>
         </div>
         
-        <!-- FAQ Section -->
         <div class="section" id="faq">
             <h2 class="section-title"><span class="icon">❓</span> Frequently Asked Questions</h2>
             
@@ -687,6 +711,49 @@ Mount & Blade II Bannerlord/Modules
                 <div class="faq-question">⚠️ What should I know about the BETA status?</div>
                 <div class="faq-answer">
                     <p><strong>Answer:</strong> AIInfluence is in BETA. Bugs, weird NPC behavior, and unexpected AI actions are normal. Report issues in appropriate channels.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🎮 Which Bannerlord versions are supported? Is 1.4 Beta supported?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> AI Influence officially supports <strong>Bannerlord 1.3.13 through 1.3.15</strong> (stable branch).</p>
+                    <p style="margin-top:8px;"><strong>Bannerlord 1.4 Beta is NOT supported.</strong> The mod has not been developed or tested against the 1.4 beta. Using AI Influence on 1.4 beta may result in crashes, missing functionality, or broken NPC behaviour. Always remain on the stable 1.3.x branch for a supported experience.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🖥️ Can I use a local LLM / offline AI model (Ollama, KoboldCpp, LM Studio)?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> Technically the mod supports local AI endpoints, but <strong>we strongly discourage it</strong>. Local models are generally far too weak for AI Influence's complex prompt system, which includes diplomacy chains, NPC memory, dynamic events, and action parsing. You will likely experience:</p>
+                    <ul>
+                        <li>NPCs giving short, repetitive, or broken responses</li>
+                        <li>Actions and commands being ignored or misinterpreted</li>
+                        <li>Diplomacy system failing to function correctly</li>
+                        <li>Overall poor roleplay quality</li>
+                    </ul>
+                    <p style="margin-top:8px;">Use a cloud-based API (OpenRouter, DeepSeek, Player2 with a capable model) for the intended experience.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">💸 Are there any good free AI models I can use with AI Influence?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> Unfortunately, <strong>there are no permanently free AI models</strong> that perform well enough for AI Influence. Free-tier options occasionally appear temporarily (limited free credits, promotional periods, etc.), but they are either rate-limited, low quality, or discontinued after a short time — none of them offer a consistently good experience.</p>
+                    <p style="margin-top:8px;">For a proper AI Influence playthrough you need a paid solution. The most cost-effective options are:</p>
+                    <ul>
+                        <li><strong>Player2</strong> — daily free energy spinner + paid plans, easy setup</li>
+                        <li><strong>DeepSeek API</strong> — very affordable, good quality</li>
+                        <li><strong>OpenRouter</strong> — pay-per-token, access to many top models</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">⚙️ What is the minimum AI model I should use with Player2?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> When using Player2, you must select <strong>at least DeepSeek V3 (3.2)</strong> or an equivalent-tier model. Anything cheaper or weaker than DeepSeek V3/3.2 will not run AI Influence at full functionality — expect degraded NPC dialogue, broken action chains, and poor diplomacy responses.</p>
+                    <p style="margin-top:8px;">In Player2's model selector, always pick a mid-tier or higher model. The smarter the model, the better the in-game experience.</p>
                 </div>
             </div>
             
@@ -714,9 +781,36 @@ Mount & Blade II Bannerlord/Modules
                     <p><strong>Answer:</strong> AI analyzes dialogues and creates news, rumors, and political events. These spread between NPCs and can influence alliances, trigger wars, or peace agreements. ⚠️ Some features are experimental.</p>
                 </div>
             </div>
+
+            <div class="faq-item">
+                <div class="faq-question">👑 How do I declare war, make peace, or form alliances as a ruler?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> If you are a king/queen, you can issue diplomatic commands through your <strong>governor</strong> (the NPC assigned to your fief). When talking to your governor, simply state your political decision in character (e.g., "I want to declare war on the Western Empire" or "Propose peace with Battania"). The governor will then publish an official statement on your behalf, which appears in blue on the campaign map. The AI rulers will evaluate your declaration and react accordingly. You must have a governor appointed in one of your settlements for this feature to work.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🔄 How do I transfer troops or prisoners between my party and an NPC party?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> The NPC can use the <code>transfer_troops_and_prisoners</code> action. When talking to a mobile NPC party (not in your own party), you can ask them to give or receive specific troops/prisoners. The NPC must have those units available. Mention exact troop names from the "Your Forces" / "Your Captives" lists, and the AI will decide whether to agree based on personality and situation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">📜 What is create_rp_item and how do I use it?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> <code>create_rp_item</code> lets an NPC physically give you a roleplay item (letter, document, token, etc.). The item is automatically added to your inventory. Before creating it, the AI checks your inventory to avoid duplicates. You can ask an NPC to write a letter, sign a document, or offer a keepsake — if they agree, the action creates it on the spot.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🔍 How do I find my campaign ID for editing save files?</div>
+                <div class="faq-answer">
+                    <p><strong>Answer:</strong> Open the mod log at <code>Modules/AIInfluence/logs/mod_log.txt</code> and look for a line like: <code>Created save directory: ...\save_data\b7ed0c2f2399</code>. The last part (<code>b7ed0c2f2399</code>) is your campaign ID. You can also use MCM → Debug → Show Save Folder Info.</p>
+                </div>
+            </div>
         </div>
         
-        <!-- Troubleshooting -->
         <div class="section" id="troubleshooting">
             <h2 class="section-title"><span class="icon">🔧</span> Troubleshooting Guide</h2>
             
@@ -726,7 +820,7 @@ Mount & Blade II Bannerlord/Modules
                 <div class="step">
                     <strong>Check These First:</strong>
                     <ul>
-                        <li>✅ Correct Bannerlord version? (1.2.12 or 1.3.1)</li>
+                        <li>✅ Correct Bannerlord version? (1.3.13 – 1.3.15 stable — <strong>NOT 1.4 beta</strong>)</li>
                         <li>✅ Dependencies installed? (Harmony, ButterLib, UIExtenderEx, MCM)</li>
                         <li>✅ Load order correct? (Dependencies ABOVE AIInfluence)</li>
                         <li>✅ Running without conflicting dialogue/diplomacy mods?</li>
@@ -742,6 +836,7 @@ Mount & Blade II Bannerlord/Modules
                         <li>✔ URL correct? (e.g., <code>http://localhost:4315/</code>)</li>
                         <li>✔ Internet ON? (if using cloud AI)</li>
                         <li>✔ API Key entered correctly? (if required)</li>
+                        <li>✔ If using Player2: is selected model at least <strong>DeepSeek V3/3.2</strong>?</li>
                     </ul>
                     <p class="success"><strong>✅ Tip:</strong> Press "Test Connection" button in MCM!</p>
                 </div>
@@ -758,7 +853,6 @@ Mount & Blade II Bannerlord/Modules
             </div>
         </div>
         
-        <!-- Asterisk Roleplay Guide -->
         <div class="section" id="asterisk-rp">
             <h2 class="section-title"><span class="icon">⭐</span> Asterisk Roleplay Guide</h2>
             
@@ -766,7 +860,7 @@ Mount & Blade II Bannerlord/Modules
                 <h3><span class="icon">🎭</span> Using Asterisks Actions for Better Immersion</h3>
                 
                 <div class="step">
-                    <strong>1. Purpose & Benefits:</strong>
+                    <strong>1. Purpose &amp; Benefits:</strong>
                     <ul>
                         <li>✅ Better management of situations with NPCs</li>
                         <li>✅ Clarify NPC misunderstandings</li>
@@ -791,17 +885,13 @@ Mount & Blade II Bannerlord/Modules
                     <p><strong>Situation:</strong> You want information from Korin, a merchant in Balgard.</p>
                     <p><strong>Your Character:</strong> Wandering merchant/mercenary who served a Western Empire lord.</p>
                     
-                    <div class="code-block">
-"I slowly walk by the side of road. I smile gently when approaching Korin's stall, then I slowly look at his wares *Well, I see you have pretty decent offer of nice wares* I'm gently touching one of the books that are displayed at stall, then I shift my focus back to Korin *I'm interested in some specific goods, and I heard that you may be the one who could provide them for me* I smile gently, a sun is lightly shining at the whole street when I come a few steps closer to the stall *I'm very interested in some old books from the region.*"
-                    </div>
+                    <div class="code-block">"I slowly walk by the side of road. I smile gently when approaching Korin's stall, then I slowly look at his wares *Well, I see you have pretty decent offer of nice wares* I'm gently touching one of the books that are displayed at stall, then I shift my focus back to Korin *I'm interested in some specific goods, and I heard that you may be the one who could provide them for me* I smile gently, a sun is lightly shining at the whole street when I come a few steps closer to the stall *I'm very interested in some old books from the region.*"</div>
                 </div>
                 
                 <div class="step">
                     <strong>4. Correcting AI Mistakes:</strong>
                     <p>When NPCs don't believe your words, use asterisk actions to provide context:</p>
-                    <div class="code-block">
-"I nod gently then repeat myself *The words I have spoken are the honest truth, if you don't want to believe me, maybe you should ask your advisors* I slowly turn my head to the advisors of the king, and watch with smile on my face when they agree with my words *Now you see, that I did not lie to you.*"
-                    </div>
+                    <div class="code-block">"I nod gently then repeat myself *The words I have spoken are the honest truth, if you don't want to believe me, maybe you should ask your advisors* I slowly turn my head to the advisors of the king, and watch with smile on my face when they agree with my words *Now you see, that I did not lie to you.*"</div>
                 </div>
                 
                 <div class="step">
@@ -824,16 +914,13 @@ Mount & Blade II Bannerlord/Modules
                 
                 <div class="step">
                     <strong>7. Full Conversation Example:</strong>
-                    <div class="code-block">
-Player: *stops the procession of my leper knights, seeing the imperial banners in the distance. We step off the road, our armor slowly crunching as we move. I turn to Ragaea* Greetings, Empress, it is an honor to meet you on the road *I nod slightly with my deer-antlered helmet* I am Oskar of the Leper Knights.
+                    <div class="code-block">Player: *stops the procession of my leper knights, seeing the imperial banners in the distance. We step off the road, our armor slowly crunching as we move. I turn to Ragaea* Greetings, Empress, it is an honor to meet you on the road *I nod slightly with my deer-antlered helmet* I am Oskar of the Leper Knights.
 
-Ragaea: *I raise my hand in greeting, slightly bowing my head, which causes the heavy jeweled crown to gently shift in my hair. My scale armor clinks softly as I move* Greetings, Oskar. I saw your banners on the road. Leper Knights... I have heard tales of your service to travelers. It is a noble occupation in these troubled times. *My eyes survey your group, assessing their discipline and weaponry* What brings you to this region? The road to Lartuzys is not the safest, especially when The Aseraeans are tearing at our southern borders.
-                    </div>
+Ragaea: *I raise my hand in greeting, slightly bowing my head, which causes the heavy jeweled crown to gently shift in my hair. My scale armor clinks softly as I move* Greetings, Oskar. I saw your banners on the road. Leper Knights... I have heard tales of your service to travelers. It is a noble occupation in these troubled times. *My eyes survey your group, assessing their discipline and weaponry* What brings you to this region? The road to Lartuzys is not the safest, especially when The Aseraeans are tearing at our southern borders.</div>
                 </div>
             </div>
         </div>
         
-        <!-- Multiple NPC Conversations -->
         <div class="section" id="multi-npc">
             <h2 class="section-title"><span class="icon">👥</span> Multiple NPC Conversations</h2>
             
@@ -862,8 +949,7 @@ Ragaea: *I raise my hand in greeting, slightly bowing my head, which causes the 
                 <div class="step">
                     <strong>4. Edit world.txt File:</strong>
                     <p>Add the following rule to your world.txt file:</p>
-                    <div class="code-block">
-DUAL-CONVERSATION FORMAT (universal roleplay rule)
+                    <div class="code-block">DUAL-CONVERSATION FORMAT (universal roleplay rule)
 Whenever the player explicitly asks an NPC to speak for two (or more) named characters in the same scene ("RP both {Character} and {Character}", "let Elga and Sidunric talk", etc.), that NPC must format the reply exactly like this:
 
 CharacterOne: action/description in asterisks Spoken line or inner thought.
@@ -874,16 +960,13 @@ CharacterThree: action/description in asterisks Spoken line or inner thought.
 
 CharacterFour: action/description in asterisks Spoken line or inner thought.
 
-Alternate one block per speaker, never merging them. Keep each character's voice, personality, and physical quirks perfectly intact. Everything said in these replies are to be remembered by each respective character even though the context isn't in their JSON files. Continue the back-and-forth naturally until the conversation pauses or the player interrupts. If one character is silent for a beat, still give them a labeled block to show body language or reaction. Never narrate as the player or break the labeling system.
-                    </div>
+Alternate one block per speaker, never merging them. Keep each character's voice, personality, and physical quirks perfectly intact. Everything said in these replies are to be remembered by each respective character even though the context isn't in their JSON files. Continue the back-and-forth naturally until the conversation pauses or the player interrupts. If one character is silent for a beat, still give them a labeled block to show body language or reaction. Never narrate as the player or break the labeling system.</div>
                 </div>
                 
                 <div class="step">
-                    <strong>5. Gathering NPCs & Conversation:</strong>
+                    <strong>5. Gathering NPCs &amp; Conversation:</strong>
                     <p>Gather NPCs in the same place (ideal for meetings). When speaking to the main NPC (settlement owner/meeting organizer), end your statement with:</p>
-                    <div class="code-block">
-*RP all four characters in the same reply using Hecard:, Servic:, Richelda:, Servic: labels so we can follow their back-and-forth easily.*
-                    </div>
+                    <div class="code-block">*RP all four characters in the same reply using Hecard:, Servic:, Richelda:, Servic: labels so we can follow their back-and-forth easily.*</div>
                     <p class="warning">⚠️ <strong>Important:</strong> Always name each NPC involved to maintain consistency.</p>
                 </div>
                 
@@ -894,7 +977,6 @@ Alternate one block per speaker, never merging them. Keep each character's voice
             </div>
         </div>
         
-        <!-- ChatSync Submod -->
         <div class="section" id="chatsync">
             <h2 class="section-title"><span class="icon">🔄</span> ChatSync Submod</h2>
             
@@ -969,7 +1051,6 @@ Alternate one block per speaker, never merging them. Keep each character's voice
             </div>
         </div>
         
-        <!-- Text-to-Speech Guide -->
         <div class="section" id="tts-guide">
             <h2 class="section-title"><span class="icon">🔊</span> Text-to-Speech (TTS) Guide</h2>
             
@@ -992,8 +1073,7 @@ Alternate one block per speaker, never merging them. Keep each character's voice
                 
                 <div class="step">
                     <strong>TTS Voice Assignment:</strong>
-                    <div class="code-block">
-MALE VOICES:
+                    <div class="code-block">MALE VOICES:
 01955d76-ed5b-74ba-89e5-2b4b45e632cd - Benjamin (en_US)
 01955d76-ed5b-74de-83e5-800a44fee0d1 - Caleb (en_US)
 01955d76-ed5b-7566-9c0e-bce4d88ceba0 - Charles (en_US)
@@ -1022,8 +1102,7 @@ FEMALE VOICES:
 01955d76-ed5b-7474-86b2-a41b310c2a2d - Mia (en_US)
 01955d76-ed5b-7426-8748-4b0e5aea1974 - Olivia (en_US)
 01955d76-ed5b-751c-b341-0ee85dbefd92 - Poppy (en_US)
-01955d76-ed5b-73e0-a88d-cbeb3c5b499d - Sophia (en_US)
-                    </div>
+01955d76-ed5b-73e0-a88d-cbeb3c5b499d - Sophia (en_US)</div>
                 </div>
                 
                 <div class="faq-item">
@@ -1042,7 +1121,6 @@ FEMALE VOICES:
             </div>
         </div>
         
-        <!-- Rollback AI Actions -->
         <div class="section" id="rollback-ai">
             <h2 class="section-title"><span class="icon">⏪</span> Rollback AI Actions</h2>
             
@@ -1062,9 +1140,7 @@ FEMALE VOICES:
                 <div class="step">
                     <strong>Step 2: Locate Mod Files</strong>
                     <p>Navigate to mod installation folder (Nexus manual download recommended):</p>
-                    <div class="code-block">
-Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
-                    </div>
+                    <div class="code-block">Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421</div>
                 </div>
                 
                 <div class="step">
@@ -1101,13 +1177,12 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                 </div>
                 
                 <div class="step">
-                    <strong>Step 8: Save & Reload</strong>
+                    <strong>Step 8: Save &amp; Reload</strong>
                     <p>Save the JSON file and reload your previous save game.</p>
                 </div>
             </div>
         </div>
         
-        <!-- JSON Editing Guide -->
         <div class="section" id="json-editing">
             <h2 class="section-title"><span class="icon">📝</span> Editing NPC .JSON Files</h2>
             
@@ -1161,7 +1236,6 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
             </div>
         </div>
         
-        <!-- Diplomacy System -->
         <div class="section" id="diplomacy">
             <h2 class="section-title"><span class="icon">👑</span> Diplomacy System Guide</h2>
             
@@ -1194,6 +1268,21 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                     <p>Statements appear in BLUE on the campaign map 🌐</p>
                     <p><em>AI will evaluate your actions — not just accept them.</em></p>
                 </div>
+
+                <div class="step">
+                    <strong>🗣️ How to Issue Political Decisions (War, Peace, Alliances) via Governor:</strong>
+                    <p>Once you rule a kingdom, you cannot simply declare war from your own character sheet. Instead, you must speak to your <strong>governor</strong> (the companion or noble assigned to manage your fief). During dialogue, tell them what you want to do, using natural language:</p>
+                    <ul>
+                        <li><em>"I want to declare war on the Northern Empire. Make a public statement."</em></li>
+                        <li><em>"Propose a peace treaty with the Aserai. We cannot fight on two fronts."</em></li>
+                        <li><em>"Offer an alliance to Battania. Mention our common enemy."</em></li>
+                        <li><em>"Demand reparations from Sturgia for their raids."</em></li>
+                    </ul>
+                    <p>The governor will then format your request as an official diplomatic statement. It will be broadcast in blue on the campaign map, and other rulers will react. <strong>Make sure you actually have a governor appointed</strong> — if the settlement has no governor, you cannot issue player statements. The governor must also be an NPC you have already initialized (talked to at least once).</p>
+                    <div class="notice-box">
+                        <strong>💡 Tip:</strong> You can also refuse or counter proposals from other kingdoms through your governor. If a foreign ruler suggests peace, tell your governor "Reject their peace offering and demand territory instead." The AI will respond accordingly.
+                    </div>
+                </div>
             </div>
             
             <div class="tutorial-card">
@@ -1216,9 +1305,8 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
             </div>
         </div>
         
-        <!-- NPC Action System & Rules -->
         <div class="section" id="action-rules">
-            <h2 class="section-title"><span class="icon">⚔️</span> NPC Action System & Rules</h2>
+            <h2 class="section-title"><span class="icon">⚔️</span> NPC Action System &amp; Rules</h2>
             
             <div class="tutorial-card">
                 <h3><span class="icon">📋</span> NPC ACTION SYSTEM - REFERENCE GUIDE</h3>
@@ -1233,7 +1321,7 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                 <div class="step">
                     <strong>All Available NPC Actions</strong>
                     
-                    <h4>2.1. Movement & Basic Actions</h4>
+                    <h4>2.1. Movement &amp; Basic Actions</h4>
                     <ul>
                         <li><strong>follow_player</strong> - NPC follows the player, accompanies them</li>
                         <li><strong>go_to_settlement</strong> - NPC travels to the specified settlement (city, castle, village)</li>
@@ -1245,15 +1333,19 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                         <li><strong>raid_village</strong> - NPC raids the specified enemy village</li>
                         <li><strong>create_party</strong> - NPC creates their own party (leaves the player's party)</li>
                     </ul>
+
+                    <h4>2.10. transfer_troops_and_prisoners</h4>
+                    <p><strong>What it does:</strong> NPC transfers specific troops and/or prisoners between their party and the player's party.</p>
+                    <p><strong>When used:</strong> When the player asks the NPC to give or receive specific troops/prisoners, or when the NPC offers to transfer them.</p>
+                    <p><strong>Available:</strong> Only to NPCs with mobile parties (not in player's party).</p>
+                    <p><strong>Important:</strong> NPC must have the troops/prisoners in their party to transfer them. Use exact string_ids from "Your Forces" and "Your Captives" sections in the prompt.</p>
                     
-                    <h4>2.10. Multi-tasking actions (chains)</h4>
+                    <h4>2.11. Multi-tasking actions (chains)</h4>
                     <p><strong>What it does:</strong> NPC can perform multiple actions in sequence in one chain</p>
                     <p><strong>Examples of chains:</strong></p>
-                    <div class="code-block">
-- Visit multiple settlements: "go to city A, then to city B, then return"
+                    <div class="code-block">- Visit multiple settlements: "go to city A, then to city B, then return"
 - Complete a task and return: "attack bandits and return to me"
-- Combined tasks: "visit a city, then patrol it, then return"
-                    </div>
+- Combined tasks: "visit a city, then patrol it, then return"</div>
                     <p>NPCs can combine actions with commas, creating a sequence of tasks that will be completed one after another.</p>
                 </div>
                 
@@ -1286,6 +1378,13 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                     </ul>
                     <p><strong>Important:</strong> Used only after final price agreement, not during negotiations.</p>
                 </div>
+
+                <div class="step">
+                    <strong>Roleplay Item Creation</strong>
+                    <ul>
+                        <li><strong>create_rp_item</strong> - NPC creates a roleplay item (letter, document, note, sign, etc.) and automatically gives it to the player. The NPC must check the player's inventory first to avoid duplicates.</li>
+                    </ul>
+                </div>
                 
                 <div class="step">
                     <strong>Diplomatic Actions (kingdom_action)</strong>
@@ -1298,6 +1397,7 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                         <li><strong>demand_territory / transfer_territory</strong> - Demand or transfer of territory</li>
                         <li><strong>demand_tribute / accept_tribute / reject_tribute</strong> - Tribute operations</li>
                         <li><strong>demand_reparations / accept_reparations / reject_reparations</strong> - Reparations operations</li>
+                        <li><strong>transfer_kingdom</strong> - Transfer kingdom leadership from one ruler to another. This is a permanent, major decision. Use only when explicitly agreed upon in dialogue. Recipient must be a vassal with sufficient prestige.</li>
                     </ul>
                 </div>
                 
@@ -1322,8 +1422,8 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                     
                     <h4>Creating the file:</h4>
                     <ol>
-                        <li>Find the AIInfluence mod folder (usually in `Modules/AIInfluence/`)</li>
-                        <li>Create a text file named `actionrules.txt` in the root of the mod folder</li>
+                        <li>Find the AIInfluence mod folder (usually in <code>Modules/AIInfluence/</code>)</li>
+                        <li>Create a text file named <code>actionrules.txt</code> in the root of the mod folder</li>
                         <li>Add your rules to this file (in English)</li>
                     </ol>
                     
@@ -1346,12 +1446,10 @@ Steam Path: Drive:\PathToSteamInstall\workshop\content\261550\3584621421
                         <li>Can add example situations</li>
                     </ul>
                     
-                    <div class="code-block">
-Good rule examples:
+                    <div class="code-block">Good rule examples:
 - NPC should always verify settlement information is provided in the prompt before using go_to_settlement action. If settlement details are missing, NPC should say "I don't know which settlement you mean" and NOT use the action.
 - NPC with high honor trait should refuse to raid friendly or neutral villages, even if player orders it. They should explain their refusal based on their principles.
-- NPC should never attack settlements that belong to their own kingdom or allied kingdoms, even if player suggests it.
-                    </div>
+- NPC should never attack settlements that belong to their own kingdom or allied kingdoms, even if player suggests it.</div>
                     
                     <div class="warning">
                         <strong>Bad rule examples (too general):</strong>
@@ -1367,23 +1465,17 @@ Good rule examples:
                     <strong>Examples of Rules for Different Situations</strong>
                     
                     <h4>Rules for information verification:</h4>
-                    <div class="code-block">
-- CRITICAL: Before using any action that requires settlement or party information (go_to_settlement, attack_party, patrol_settlement, siege_settlement, raid_village, wait_near_settlement), NPC MUST verify that the necessary information is provided in the prompt. If information is missing or unknown, NPC should stay in character, express uncertainty, and NOT use the action.
-- NPC should never guess or invent information. Only use actions when the necessary details are clearly available in the prompt.
-                    </div>
+                    <div class="code-block">- CRITICAL: Before using any action that requires settlement or party information (go_to_settlement, attack_party, patrol_settlement, siege_settlement, raid_village, wait_near_settlement), NPC MUST verify that the necessary information is provided in the prompt. If information is missing or unknown, NPC should stay in character, express uncertainty, and NOT use the action.
+- NPC should never guess or invent information. Only use actions when the necessary details are clearly available in the prompt.</div>
                     
                     <h4>Rules for considering NPC personality:</h4>
-                    <div class="code-block">
-- NPC with high honor trait should refuse to raid villages unless they are clearly enemy villages. They should explain their refusal based on honor and principles.
+                    <div class="code-block">- NPC with high honor trait should refuse to raid villages unless they are clearly enemy villages. They should explain their refusal based on honor and principles.
 - NPC with cruel trait is more likely to agree to raid villages, but should still verify the target is an enemy.
-- NPC with calculating trait should consider the strategic value and risks before agreeing to siege_settlement or attack_party actions.
-                    </div>
+- NPC with calculating trait should consider the strategic value and risks before agreeing to siege_settlement or attack_party actions.</div>
                     
                     <h4>Rules for preventing errors:</h4>
-                    <div class="code-block">
-- NPC should NEVER use attack_party, siege_settlement, or raid_village actions against targets that belong to their own kingdom, allied kingdoms, or friendly factions. Always check the faction relationship before using combat actions.
-- NPC should verify the target settlement's faction status before using siege_settlement. If the settlement belongs to an ally or neutral faction, NPC should refuse and explain why.
-                    </div>
+                    <div class="code-block">- NPC should NEVER use attack_party, siege_settlement, or raid_village actions against targets that belong to their own kingdom, allied kingdoms, or friendly factions. Always check the faction relationship before using combat actions.
+- NPC should verify the target settlement's faction status before using siege_settlement. If the settlement belongs to an ally or neutral faction, NPC should refuse and explain why.</div>
                 </div>
                 
                 <div class="step">
@@ -1392,7 +1484,7 @@ Good rule examples:
                     <div class="faq-item">
                         <div class="faq-question">❓ Where is the actionrules.txt file located?</div>
                         <div class="faq-answer">
-                            <p><strong>Answer:</strong> In the root of the AIInfluence mod folder (usually `Modules/AIInfluence/actionrules.txt`)</p>
+                            <p><strong>Answer:</strong> In the root of the AIInfluence mod folder (usually <code>Modules/AIInfluence/actionrules.txt</code>)</p>
                         </div>
                     </div>
                     
@@ -1440,17 +1532,15 @@ Good rule examples:
             </div>
         </div>
         
-        <!-- Technical Guide & File Structure -->
         <div class="section" id="technical-guide">
-            <h2 class="section-title"><span class="icon">🔧</span> Technical Guide & File Structure</h2>
+            <h2 class="section-title"><span class="icon">🔧</span> Technical Guide &amp; File Structure</h2>
             
             <div class="tutorial-card">
                 <h3><span class="icon">📁</span> AI Influence — Technical Guide</h3>
                 
                 <div class="step">
                     <strong>File Structure</strong>
-                    <div class="code-block">
-AIInfluence DEV/
+                    <div class="code-block">AIInfluence DEV/
 ├── world.txt                        # World description for the AI
 ├── world_secrets.json               # NPC secrets
 ├── world_info.json                  # General information
@@ -1473,8 +1563,7 @@ AIInfluence DEV/
 └── logs/                            # Logs
     ├── mod_log.txt
     ├── diplomacy.txt
-    └── dynamicEvents.log
-                    </div>
+    └── dynamicEvents.log</div>
                 </div>
                 
                 <div class="step">
@@ -1484,7 +1573,7 @@ AIInfluence DEV/
                     <p><strong>How to edit:</strong></p>
                     <ul>
                         <li>Add your lore in the section "Additional Information About Calradia:"</li>
-                        <li>Use `{Character}` and `{Player}` instead of specific names</li>
+                        <li>Use <code>{Character}</code> and <code>{Player}</code> instead of specific names</li>
                         <li>Write in English</li>
                         <li>Save → the file will be hot‑reloaded automatically</li>
                     </ul>
@@ -1495,8 +1584,7 @@ AIInfluence DEV/
                     <p><strong>What:</strong> Secret knowledge that NPCs may know.</p>
                     
                     <p><strong>Format:</strong></p>
-                    <div class="code-block">
-[
+                    <div class="code-block">[
   {
     "id": "unique_id",
     "description": "Description for the AI",
@@ -1505,29 +1593,28 @@ AIInfluence DEV/
     "accessLevel": "high",
     "tags": ["optional"]
   }
-]
-                    </div>
+]</div>
                     
                     <p><strong>How it works:</strong></p>
                     <ol>
                         <li>On first interaction, a 0–100 roll is made</li>
-                        <li>If ≤ `knowledgeChance` → the NPC learns the secret</li>
-                        <li>The secret is added to the prompt: `"Secrets: ... (access: high)"`</li>
+                        <li>If ≤ <code>knowledgeChance</code> → the NPC learns the secret</li>
+                        <li>The secret is added to the prompt: <code>"Secrets: ... (access: high)"</code></li>
                         <li>The AI decides whether to reveal it (depends on trust)</li>
                     </ol>
                     
                     <div class="warning">
-                        <strong>Important:</strong> Use `knowledgeChance`, NOT `usageChance`!
+                        <strong>Important:</strong> Use <code>knowledgeChance</code>, NOT <code>usageChance</code>!
                     </div>
                     
                     <p><strong>Fields:</strong></p>
                     <ul>
-                        <li>`id` — unique name</li>
-                        <li>`description` — full text (passed into the AI prompt)</li>
-                        <li>`knowledgeChance` — 0–100 chance that the NPC learns it on first contact</li>
-                        <li>`applicableNPCs` — types: `all`, `lords`, `companions`, `faction_leaders`, `village_notables`, `merchants`</li>
-                        <li>`accessLevel` — `low`, `medium`, `high` (shown in the prompt)</li>
-                        <li>`tags` — for organization (does not affect logic)</li>
+                        <li><code>id</code> — unique name</li>
+                        <li><code>description</code> — full text (passed into the AI prompt)</li>
+                        <li><code>knowledgeChance</code> — 0–100 chance that the NPC learns it on first contact</li>
+                        <li><code>applicableNPCs</code> — types: <code>all</code>, <code>lords</code>, <code>companions</code>, <code>faction_leaders</code>, <code>village_notables</code>, <code>merchants</code></li>
+                        <li><code>accessLevel</code> — <code>low</code>, <code>medium</code>, <code>high</code> (shown in the prompt)</li>
+                        <li><code>tags</code> — for organization (does not affect logic)</li>
                     </ul>
                 </div>
                 
@@ -1536,8 +1623,7 @@ AIInfluence DEV/
                     <p><strong>What:</strong> Public, non‑secret information.</p>
                     
                     <p><strong>Format:</strong></p>
-                    <div class="code-block">
-[
+                    <div class="code-block">[
   {
     "id": "unique_id",
     "description": "Description (you can use {character})",
@@ -1545,20 +1631,19 @@ AIInfluence DEV/
     "applicableNPCs": ["all"],
     "category": "world"
   }
-]
-                    </div>
+]</div>
                     
                     <p><strong>Fields:</strong></p>
                     <ul>
-                        <li>`usageChance` — 0–100 chance (works like knowledgeChance)</li>
-                        <li>`applicableNPCs` — types: `all`, `lords`, `companions`, `faction_leaders`, `village_notables`, `merchants`</li>
-                        <li>`category` — `world` (persistent), `event` (temporary), `personal` (personal)</li>
+                        <li><code>usageChance</code> — 0–100 chance (works like knowledgeChance)</li>
+                        <li><code>applicableNPCs</code> — types: <code>all</code>, <code>lords</code>, <code>companions</code>, <code>faction_leaders</code>, <code>village_notables</code>, <code>merchants</code></li>
+                        <li><code>category</code> — <code>world</code> (persistent), <code>event</code> (temporary), <code>personal</code> (personal)</li>
                     </ul>
                     
                     <p><strong>Differences from secrets:</strong></p>
                     <ul>
-                        <li>Field: `usageChance` vs `knowledgeChance`</li>
-                        <li>Classification: `category` vs `accessLevel`</li>
+                        <li>Field: <code>usageChance</code> vs <code>knowledgeChance</code></li>
+                        <li>Classification: <code>category</code> vs <code>accessLevel</code></li>
                         <li>In the prompt: "General Info: ..." vs "Secrets: ... (access: high)"</li>
                     </ul>
                 </div>
@@ -1568,12 +1653,10 @@ AIInfluence DEV/
                     <p><strong>What:</strong> Romantic traditions per culture.</p>
                     
                     <p><strong>Format:</strong></p>
-                    <div class="code-block">
-{
+                    <div class="code-block">{
   "Aserai": "Description of romantic traditions...",
   "Battania": "..."
-}
-                    </div>
+}</div>
                     
                     <p><strong>Affects:</strong> Flirt style and relationship requirements.</p>
                 </div>
@@ -1621,10 +1704,10 @@ AIInfluence DEV/
                     
                     <p>You can also see service fields:</p>
                     <ul>
-                        <li>`KnownSecretsUserEdited` / `KnownInfoUserEdited` — flags that knowledge was edited by the user (if `true`, the system will no longer change these arrays)</li>
-                        <li>`DynamicEvents` / `LastEventAnalysisMessageIndex` — which dynamic events the NPC knows and which messages were already sent for analysis</li>
-                        <li>`AIGeneratedPersonality` / `AIGeneratedBackstory` — auto‑generated personality and backstory description</li>
-                        <li>Romance fields (`RomanceLevel`, `LastRomanceInteractionDays`, `IsRomanceEligible`) and battle fields (`SettlementCombatInfo`) — managed only by the system</li>
+                        <li><code>KnownSecretsUserEdited</code> / <code>KnownInfoUserEdited</code> — flags that knowledge was edited by the user (if <code>true</code>, the system will no longer change these arrays)</li>
+                        <li><code>DynamicEvents</code> / <code>LastEventAnalysisMessageIndex</code> — which dynamic events the NPC knows and which messages were already sent for analysis</li>
+                        <li><code>AIGeneratedPersonality</code> / <code>AIGeneratedBackstory</code> — auto‑generated personality and backstory description</li>
+                        <li>Romance fields (<code>RomanceLevel</code>, <code>LastRomanceInteractionDays</code>, <code>IsRomanceEligible</code>) and battle fields (<code>SettlementCombatInfo</code>) — managed only by the system</li>
                     </ul>
                     
                     <div class="warning">
@@ -1634,12 +1717,10 @@ AIInfluence DEV/
                 
                 <div class="step">
                     <strong>Editing Knowledge</strong>
-                    <p>After changing `KnownSecrets` or `KnownInfo`:</p>
-                    <div class="code-block">
-"KnownSecrets": ["My_Custom_Secret"],
-"KnownSecretsUserEdited": false  // ← Will automatically become true
-                    </div>
-                    <p>The `UserEdited: true` flag → the system will not touch this field.</p>
+                    <p>After changing <code>KnownSecrets</code> or <code>KnownInfo</code>:</p>
+                    <div class="code-block">"KnownSecrets": ["My_Custom_Secret"],
+"KnownSecretsUserEdited": false  // ← Will automatically become true</div>
+                    <p>The <code>UserEdited: true</code> flag → the system will not touch this field.</p>
                     <p><strong>Resetting flags:</strong> MCM → NPC Management → Reset User‑Edited Knowledge</p>
                 </div>
                 
@@ -1649,21 +1730,19 @@ AIInfluence DEV/
                     
                     <p><strong>Important fields:</strong></p>
                     <ul>
-                        <li>`type` — `military`, `political`, `economic`, `social`, `mysterious`</li>
-                        <li>`importance` — 1–10 (how important)</li>
-                        <li>`kingdoms_involved` — array of kingdom `string_id`</li>
-                        <li>`allows_diplomatic_response` — whether rulers can make statements</li>
-                        <li>`expiration_campaign_days` — when it expires</li>
+                        <li><code>type</code> — <code>military</code>, <code>political</code>, <code>economic</code>, <code>social</code>, <code>mysterious</code></li>
+                        <li><code>importance</code> — 1–10 (how important)</li>
+                        <li><code>kingdoms_involved</code> — array of kingdom <code>string_id</code></li>
+                        <li><code>allows_diplomatic_response</code> — whether rulers can make statements</li>
+                        <li><code>expiration_campaign_days</code> — when it expires</li>
                     </ul>
                     
                     <p>Additionally, events have:</p>
                     <ul>
-                        <li>`id` — unique event identifier (string, NPCs store knowledge about it in `DynamicEvents`)</li>
-                        <li>`player_involved` — whether the player participated</li>
-                        <li>`spread_speed` — how fast it spreads</li>
+                        <li><code>id</code> — unique event identifier (string, NPCs store knowledge about it in <code>DynamicEvents</code>)</li>
+                        <li><code>player_involved</code> — whether the player participated</li>
+                        <li><code>spread_speed</code> — how fast it spreads</li>
                     </ul>
-                    
-                    <p><strong>NPC link:</strong> The list of NPCs who know about an event is stored in each `NPC (id).json` in the `DynamicEvents` array. `DynamicEventsManager` automatically updates these fields and removes expired events from NPCs.</p>
                     
                     <div class="warning">
                         <strong>Editing:</strong> Not recommended (managed automatically).
@@ -1675,16 +1754,14 @@ AIInfluence DEV/
                     <p><strong>What:</strong> Kingdom rulers' statements.</p>
                     
                     <p><strong>Structure:</strong></p>
-                    <div class="code-block">
-{
+                    <div class="code-block">{
   "kingdom_id": "battania",
   "statement_text": "Statement text",
   "action": "None/DeclareWar/ProposePeace/...",
   "target_kingdom_id": "khuzait",
   "reason": "Reason",
   "event_id": "event this statement refers to"
-}
-                    </div>
+}</div>
                     
                     <p><strong>Storage:</strong> Last 15 statements over 50 in‑game days.</p>
                     <p><strong>Editing:</strong> Not needed (automatic system).</p>
@@ -1692,15 +1769,15 @@ AIInfluence DEV/
                 
                 <div class="step">
                     <strong>Additional Diplomacy Files</strong>
-                    <p>All files below are in `save_data/[CAMPAIGN_ID]/` and are managed automatically by the diplomacy system.</p>
+                    <p>All files below are in <code>save_data/[CAMPAIGN_ID]/</code> and are managed automatically by the diplomacy system.</p>
                     
                     <ul>
-                        <li>`diplomatic_events.json` — active diplomatic events linked to dynamic events (`DynamicEvents`)</li>
-                        <li>`pending_player_statements.json` — deferred player statements to be published later</li>
-                        <li>`trade_agreements.json` — current trade agreements between kingdoms</li>
-                        <li>`territory_transfers.json` — history of fief transfers between kingdoms</li>
-                        <li>`tributes.json` — tribute payment agreements</li>
-                        <li>`reparations.json` — reparations data (history and open claims)</li>
+                        <li><code>diplomatic_events.json</code> — active diplomatic events linked to dynamic events (<code>DynamicEvents</code>)</li>
+                        <li><code>pending_player_statements.json</code> — deferred player statements to be published later</li>
+                        <li><code>trade_agreements.json</code> — current trade agreements between kingdoms</li>
+                        <li><code>territory_transfers.json</code> — history of fief transfers between kingdoms</li>
+                        <li><code>tributes.json</code> — tribute payment agreements</li>
+                        <li><code>reparations.json</code> — reparations data (history and open claims)</li>
                     </ul>
                     
                     <div class="warning">
@@ -1711,7 +1788,7 @@ AIInfluence DEV/
                 <div class="step">
                     <strong>📊 Logs</strong>
                     
-                    <h4>`logs/mod_log.txt` — main log</h4>
+                    <h4><code>logs/mod_log.txt</code> — main log</h4>
                     <ul>
                         <li>Mod initialization</li>
                         <li>Config loading</li>
@@ -1720,7 +1797,7 @@ AIInfluence DEV/
                     </ul>
                     <p><strong>Check when:</strong> NPC does not respond, Secrets are not loaded, In‑game errors occur</p>
                     
-                    <h4>`logs/diplomacy.txt` — diplomacy</h4>
+                    <h4><code>logs/diplomacy.txt</code> — diplomacy</h4>
                     <ul>
                         <li>Diplomacy system initialization</li>
                         <li>Creation of diplomatic situations and statements</li>
@@ -1729,7 +1806,7 @@ AIInfluence DEV/
                         <li>Diplomacy system errors and warnings</li>
                     </ul>
                     
-                    <h4>`logs/dynamicEvents.log` — dynamic events</h4>
+                    <h4><code>logs/dynamicEvents.log</code> — dynamic events</h4>
                     <ul>
                         <li>Event generation (including full prompt and AI response with detailed debugging on)</li>
                         <li>Event propagation to NPCs (who learned what and why)</li>
@@ -1738,6 +1815,68 @@ AIInfluence DEV/
                 </div>
                 
                 <div class="step">
+                    <strong>🛠️ Common Tasks</strong>
+                    <h4>Add a secret</h4>
+                    <ol>
+                        <li>Open <code>world_secrets.json</code></li>
+                        <li>Add an object to the array with <code>knowledgeChance</code>, not <code>usageChance</code></li>
+                        <li>Save → hot‑reloaded automatically</li>
+                    </ol>
+                    <h4>Give a secret to a specific NPC</h4>
+                    <ol>
+                        <li>Open the NPC file in <code>save_data/[CAMPAIGN_ID]/</code></li>
+                        <li>Find <code>"KnownSecrets"</code> and add the secret ID</li>
+                        <li>Save → the <code>UserEdited</code> flag will be set automatically</li>
+                    </ol>
+                    <h4>Find the campaign ID</h4>
+                    <ol>
+                        <li>Open <code>logs/mod_log.txt</code></li>
+                        <li>Look for: <code>Created save directory: ...\save_data\b7ed0c2f2399</code></li>
+                        <li>The last part is your campaign ID</li>
+                    </ol>
+                    <h4>Reset NPC data</h4>
+                    <ul>
+                        <li><strong>MCM → NPC Management → Clear Current Campaign NPC Data</strong> (deletes all)</li>
+                        <li><strong>MCM → NPC Management → Erase Specific NPC</strong> (deletes one)</li>
+                        <li>Manually delete the file <code>save_data/[ID]/NPC_name.json</code></li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <strong>📌 Cheat Sheet</strong>
+                    <h4>NPC types for <code>applicableNPCs</code></h4>
+                    <ul>
+                        <li><code>"all"</code> — everyone</li>
+                        <li><code>"lords"</code> — lords</li>
+                        <li><code>"companions"</code> — companions</li>
+                        <li><code>"faction_leaders"</code> — rulers</li>
+                        <li><code>"village_notables"</code> — village notables</li>
+                        <li><code>"merchants"</code> — merchants</li>
+                    </ul>
+                    <h4>Event types</h4>
+                    <ul>
+                        <li><code>"news"</code> — important news</li>
+                        <li><code>"political"</code> — diplomacy</li>
+                        <li><code>"military"</code> — wars, battles</li>
+                        <li><code>"economic"</code> — trade</li>
+                        <li><code>"local"</code> — local</li>
+                        <li><code>"rumor"</code> — rumors</li>
+                    </ul>
+                    <h4>Diplomatic actions</h4>
+                    <ul>
+                        <li><code>"None"</code> — statement only</li>
+                        <li><code>"DeclareWar"</code> — declare war</li>
+                        <li><code>"ProposePeace"</code> — propose peace</li>
+                        <li><code>"AcceptPeace"</code> — accept peace</li>
+                        <li><code>"RejectPeace"</code> — reject peace</li>
+                        <li><code>"ProposeAlliance"</code> — propose alliance</li>
+                        <li><code>"AcceptAlliance"</code> — accept alliance</li>
+                        <li><code>"RejectAlliance"</code> — reject alliance</li>
+                        <li><code>"BreakAlliance"</code> — break alliance</li>
+                    </ul>
+                </div>
+
+                <div class="step">
                     <strong>⚙️ Important Rules</strong>
                     
                     <h4>JSON files</h4>
@@ -1745,30 +1884,30 @@ AIInfluence DEV/
                         <li>✅ Always validate JSON (jsonlint.com)</li>
                         <li>✅ Make backups before editing</li>
                         <li>✅ Do not delete required fields</li>
-                        <li>❌ Do not edit `dynamic_events.json` and `diplomatic_statements.json` unless necessary</li>
+                        <li>❌ Do not edit <code>dynamic_events.json</code> and <code>diplomatic_statements.json</code> unless necessary</li>
                     </ul>
                     
                     <h4>Secrets vs Info</h4>
                     <ul>
-                        <li>`world_secrets.json` → field `knowledgeChance`</li>
-                        <li>`world_info.json` → field `usageChance`</li>
+                        <li><code>world_secrets.json</code> → field <code>knowledgeChance</code></li>
+                        <li><code>world_info.json</code> → field <code>usageChance</code></li>
                         <li><strong>DO NOT CONFUSE THEM!</strong> Otherwise the value will be treated as 0.</li>
                     </ul>
                     
                     <h4>Hot Reload</h4>
                     <p>These files are hot‑reloaded automatically:</p>
                     <ul>
-                        <li>✅ `world.txt`</li>
-                        <li>✅ `world_secrets.json`</li>
-                        <li>✅ `world_info.json`</li>
-                        <li>✅ `cultural_traditions.json`</li>
+                        <li>✅ <code>world.txt</code></li>
+                        <li>✅ <code>world_secrets.json</code></li>
+                        <li>✅ <code>world_info.json</code></li>
+                        <li>✅ <code>cultural_traditions.json</code></li>
                     </ul>
                     <p>NPC files are reloaded on the next interaction.</p>
                     
                     <h4>Edit Flags</h4>
-                    <p>If you edit `KnownSecrets` or `KnownInfo`:</p>
+                    <p>If you edit <code>KnownSecrets</code> or <code>KnownInfo</code>:</p>
                     <ul>
-                        <li>The `UserEdited` flag automatically becomes `true`</li>
+                        <li>The <code>UserEdited</code> flag automatically becomes <code>true</code></li>
                         <li>The system will no longer touch these fields</li>
                         <li>Reset: MCM → Reset User‑Edited Knowledge</li>
                     </ul>
@@ -1788,18 +1927,18 @@ AIInfluence DEV/
                         <tbody>
                             <tr>
                                 <td style="border: 1px solid #8C5F2C; padding: 8px;"><strong>File</strong></td>
-                                <td style="border: 1px solid #8C5F2C; padding: 8px;">`world_secrets.json`</td>
-                                <td style="border: 1px solid #8C5F2C; padding: 8px;">`world_info.json`</td>
+                                <td style="border: 1px solid #8C5F2C; padding: 8px;"><code>world_secrets.json</code></td>
+                                <td style="border: 1px solid #8C5F2C; padding: 8px;"><code>world_info.json</code></td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #8C5F2C; padding: 8px;"><strong>Chance field</strong></td>
-                                <td style="border: 1px solid #8C5F2C; padding: 8px;">`knowledgeChance`</td>
-                                <td style="border: 1px solid #8C5F2C; padding: 8px;">`usageChance`</td>
+                                <td style="border: 1px solid #8C5F2C; padding: 8px;"><code>knowledgeChance</code></td>
+                                <td style="border: 1px solid #8C5F2C; padding: 8px;"><code>usageChance</code></td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #8C5F2C; padding: 8px;"><strong>Classification</strong></td>
-                                <td style="border: 1px solid #8C5F2C; padding: 8px;">`accessLevel` + `tags`</td>
-                                <td style="border: 1px solid #8C5F2C; padding: 8px;">`category`</td>
+                                <td style="border: 1px solid #8C5F2C; padding: 8px;"><code>accessLevel</code> + <code>tags</code></td>
+                                <td style="border: 1px solid #8C5F2C; padding: 8px;"><code>category</code></td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #8C5F2C; padding: 8px;"><strong>Purpose</strong></td>
@@ -1816,7 +1955,7 @@ AIInfluence DEV/
                     <h4>Adding new content</h4>
                     <ol>
                         <li><strong>Come up with an idea</strong> (secret, event, quest)</li>
-                        <li><strong>Add it to JSON</strong> (`world_secrets.json` or `world_info.json`)</li>
+                        <li><strong>Add it to JSON</strong> (<code>world_secrets.json</code> or <code>world_info.json</code>)</li>
                         <li><strong>Save the file</strong> → hot‑reload</li>
                         <li><strong>Create new NPCs</strong> or reset existing ones</li>
                         <li><strong>Start a dialogue</strong> → the AI will know about the new content</li>
@@ -1824,10 +1963,10 @@ AIInfluence DEV/
                     
                     <h4>Testing secrets</h4>
                     <ol>
-                        <li>Add a secret with `knowledgeChance: 100`</li>
+                        <li>Add a secret with <code>knowledgeChance: 100</code></li>
                         <li>Create a new NPC or reset an existing one</li>
                         <li>Start a dialogue</li>
-                        <li>Check the log: `[NPC] Name learned secret: ...`</li>
+                        <li>Check the log: <code>[NPC] Name learned secret: ...</code></li>
                         <li>Ask the NPC about the secret directly</li>
                     </ol>
                     
@@ -1835,7 +1974,7 @@ AIInfluence DEV/
                     <ol>
                         <li>Enable detailed logging (MCM)</li>
                         <li>Create an event (Force Generate Event)</li>
-                        <li>Check `logs/dynamicEvents.log`</li>
+                        <li>Check <code>logs/dynamicEvents.log</code></li>
                         <li>See who received the event and why</li>
                     </ol>
                 </div>
@@ -1843,7 +1982,7 @@ AIInfluence DEV/
         </div>
         
         <footer>
-            <h2 style="font-family: 'MedievalSharp', cursive; margin-bottom: 20px; color: #E8D8B6;">Community & Support</h2>
+            <h2 style="font-family: 'MedievalSharp', cursive; margin-bottom: 20px; color: #E8D8B6;">Community &amp; Support</h2>
             <p style="margin-bottom: 20px; opacity: 0.9; color: #E8D8B6;">
                 AI Influence is continuously developed with community feedback. Join our communities for support, updates, and discussions!
             </p>
@@ -1856,7 +1995,7 @@ AIInfluence DEV/
             
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(232, 216, 182, 0.2);">
                 <p><strong>Current Version:</strong> 3.3.7 • <strong>Last Updated:</strong> January 2026</p>
-                <p><strong>Compatibility:</strong> Mount & Blade II: Bannerlord v1.3.9 - 1.3.13</p>
+                <p><strong>Compatibility:</strong> Mount &amp; Blade II: Bannerlord v1.3.13 – 1.3.15 (stable) | ❌ 1.4 Beta NOT supported</p>
                 <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
                     This document is community-generated based on official changelogs. Always check official sources for latest information.
                 </p>
@@ -1866,7 +2005,6 @@ AIInfluence DEV/
     
     <script>
         function changeLanguage(lang) {
-            // Simple language switcher
             alert('Language switching functionality would be implemented here');
         }
     </script>
