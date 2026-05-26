@@ -528,6 +528,7 @@
                     <li><a href="#json-editing">Editing NPC .JSON Files</a></li>
                     <li><a href="#diplomacy">Diplomacy System Guide</a></li>
                     <li><a href="#action-rules">NPC Action System &amp; Rules</a></li>
+                    <li><a href="#battlecombat">Battle Combat Rules (battlecombatrules.txt)</a></li>
                     <li><a href="#technical-guide">Technical Guide &amp; File Structure</a></li>
                 </ul>
             </div>
@@ -915,7 +916,6 @@
                 <div class="step">
                     <strong>7. Full Conversation Example:</strong>
                     <div class="code-block">Player: *stops the procession of my leper knights, seeing the imperial banners in the distance. We step off the road, our armor slowly crunching as we move. I turn to Ragaea* Greetings, Empress, it is an honor to meet you on the road *I nod slightly with my deer-antlered helmet* I am Oskar of the Leper Knights.
-
 Ragaea: *I raise my hand in greeting, slightly bowing my head, which causes the heavy jeweled crown to gently shift in my hair. My scale armor clinks softly as I move* Greetings, Oskar. I saw your banners on the road. Leper Knights... I have heard tales of your service to travelers. It is a noble occupation in these troubled times. *My eyes survey your group, assessing their discipline and weaponry* What brings you to this region? The road to Lartuzys is not the safest, especially when The Aseraeans are tearing at our southern borders.</div>
                 </div>
             </div>
@@ -951,15 +951,10 @@ Ragaea: *I raise my hand in greeting, slightly bowing my head, which causes the 
                     <p>Add the following rule to your world.txt file:</p>
                     <div class="code-block">DUAL-CONVERSATION FORMAT (universal roleplay rule)
 Whenever the player explicitly asks an NPC to speak for two (or more) named characters in the same scene ("RP both {Character} and {Character}", "let Elga and Sidunric talk", etc.), that NPC must format the reply exactly like this:
-
 CharacterOne: action/description in asterisks Spoken line or inner thought.
-
 CharacterTwo: action/description in asterisks Spoken line or inner thought.
-
 CharacterThree: action/description in asterisks Spoken line or inner thought.
-
 CharacterFour: action/description in asterisks Spoken line or inner thought.
-
 Alternate one block per speaker, never merging them. Keep each character's voice, personality, and physical quirks perfectly intact. Everything said in these replies are to be remembered by each respective character even though the context isn't in their JSON files. Continue the back-and-forth naturally until the conversation pauses or the player interrupts. If one character is silent for a beat, still give them a labeled block to show body language or reaction. Never narrate as the player or break the labeling system.</div>
                 </div>
                 
@@ -1527,6 +1522,123 @@ FEMALE VOICES:
                             <li>Test rules in the game</li>
                             <li>Don't be afraid to experiment and adjust rules</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW SECTION: Battle Combat Rules (battlecombatrules.txt) -->
+        <div class="section" id="battlecombat">
+            <h2 class="section-title"><span class="icon">⚔️</span> Battle Combat Rules (battlecombatrules.txt)</h2>
+            <div class="tutorial-card">
+                <h3><span class="icon">🎖️</span> Formation Captain AI – How It Works</h3>
+                <div class="step">
+                    <strong>What is battlecombatrules.txt?</strong>
+                    <p>This file governs the behaviour of AI formation captains during real‑time battles. Each captain (Infantry, Ranged, Cavalry, HorseArcher) receives a tactical prompt every few seconds and must respond with a JSON object containing orders, shouts, and a tactical note. The system uses your configured AI backend (Player2, OpenRouter, etc.) to generate these responses.</p>
+                </div>
+                <div class="step">
+                    <strong>Real triggers (when the AI is called)</strong>
+                    <ul>
+                        <li><strong>Battle start</strong> – after deployment finishes, the first <code>[CAPTAIN_REQUEST]</code> is sent.</li>
+                        <li><strong>Periodic ticks</strong> – roughly every 5‑10 seconds (<code>[TICK #N]</code>).</li>
+                        <li><strong>Formation status change</strong> – when a formation becomes engaged, routing, or changes distance to enemy.</li>
+                        <li><strong>Player voice order</strong> – when you use <code>[BATTLE_ORDER]</code> (e.g., "Archers attack!"), the captain receives an updated context.</li>
+                        <li><strong>Significant casualties or terrain events</strong> – the prompt includes history and terrain features, so the AI can react to losses or obstacles.</li>
+                    </ul>
+                    <div class="notice-box">
+                        <strong>💡 Captain memory:</strong> The captain does not remember previous decisions across ticks. Each prompt is self‑contained but includes a short battle history (e.g., "t6s: 197/197 idle"). This allows limited adaptation.
+                    </div>
+                </div>
+                <div class="step">
+                    <strong>How to fill out battlecombatrules.txt</strong>
+                    <p>You do not need to edit the file manually for normal use – it is a fixed ruleset. However, if you want to customise captain behaviour, you can add rules at the end of the file (similar to actionrules.txt). The system adds these rules to every captain's prompt.</p>
+                    <p><strong>Example custom rule:</strong></p>
+                    <div class="code-block">- When enemy holds high ground and my formation is infantry, always try to move to secure nearby high ground before charging.
+- If a cliff edge is within 50m ahead, never order a charge; instead use fall_back or move sideways.
+- Ranged formations should hold fire until enemy is within 150m, then fire at will.</div>
+                </div>
+                <div class="step">
+                    <strong>JSON response format (what the captain outputs)</strong>
+                    <div class="code-block">{
+  "response": "Battle shout – 1 sentence, short, in character",
+  "orders": [
+    {
+      "formation": "infantry",            // your formation type (lowercase)
+      "movement": "move",                 // charge, move, stand_ground, advance, fall_back, retreat, follow_me
+      "move_direction": "flank_right",    // forward/back/left/right/flank_left/flank_right (optional)
+      "move_distance": 51,                // integer meters (optional)
+      "arrangement": "shield_wall"        // line, shield_wall, loose, circle, square, skein, column, scatter
+    }
+  ],
+  "troop_shouts": [
+    { "formation": "infantry", "phrase": "Shield wall!" },
+    { "formation": "infantry", "phrase": "To the high ground!" }
+  ],
+  "tactical_note": "Brief reasoning (optional but recommended)"
+}</div>
+                    <p><strong>Rules:</strong></p>
+                    <ul>
+                        <li>Only include fields that change. Omit unchanged or null fields.</li>
+                        <li><code>formation</code> must always be your own formation type (infantry, ranged, cavalry, horsearcher).</li>
+                        <li><code>response</code> is what the captain shouts – keep it brief and in‑character.</li>
+                        <li><code>troop_shouts</code> are soldier reactions (3‑8 short phrases).</li>
+                        <li><code>tactical_note</code> helps debugging and shows the AI's reasoning.</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <strong>Real example from the log (Serala Aegarax, Infantry)</strong>
+                    <p><strong>Situation:</strong></p>
+                    <ul>
+                        <li>Infantry 197/197, Line, Idle, 339m from enemy, 25m below enemy elevation.</li>
+                        <li>High ground 51m to the right, cliff edge 73m ahead (danger), forest to the side.</li>
+                        <li>Allied Ranged 15m behind, HorseArcher 55m left.</li>
+                    </ul>
+                    <p><strong>Captain's actual JSON response:</strong></p>
+                    <div class="code-block">{
+  "response": "Infantry, advance in shield wall! Keep formation tight and take the high ground to our right!",
+  "orders": [
+    {
+      "formation": "infantry",
+      "movement": "move",
+      "move_direction": "flank_right",
+      "move_distance": 51,
+      "arrangement": "shield_wall"
+    }
+  ],
+  "troop_shouts": [
+    { "formation": "infantry", "phrase": "Shield wall!" },
+    { "formation": "infantry", "phrase": "To the high ground!" },
+    { "formation": "infantry", "phrase": "We follow the commander!" },
+    { "formation": "infantry", "phrase": "Hold formation tight!" },
+    { "formation": "infantry", "phrase": "For the Ashwind!" },
+    { "formation": "infantry", "phrase": "Right flank, move!" }
+  ],
+  "tactical_note": "Enemy holds elevated position but severely outnumbered. Moving right 51m to secure high ground negates elevation advantage. Shield wall protects against their limited ranged units. Cliff ahead makes direct charge dangerous."
+}</div>
+                    <p><strong>What happened in game:</strong> The orders were executed, the captain's shout was heard, and soldiers responded with the troop shouts.</p>
+                </div>
+                <div class="step">
+                    <strong>Tactical decision rules (built into the mod)</strong>
+                    <ul>
+                        <li><strong>Terrain priority:</strong> High ground → move to secure it; forest → use as cover (good for ranged, bad for cavalry); cliff edge → never charge forward.</li>
+                        <li><strong>Formation identity:</strong> Infantry use shield_wall/line/advance; Ranged use fire_at_will/skein/loose (never charge); Cavalry use charge/flank_left/right; HorseArcher use skein/fire_at_will/keep distance.</li>
+                        <li><strong>Tactics skill level:</strong> Low (0‑100) → simple orders (charge, advance). High (200‑300) → complex flanking, terrain use, formation switches.</li>
+                        <li><strong>Morale:</strong> 80‑100 = aggressive; 50‑79 = cautious; below 50 = fall_back/retreat.</li>
+                        <li><strong>Elevation:</strong> Above enemy → charge/advance; below enemy → move to high ground or use ranged.</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <strong>Common mistakes and how to avoid them</strong>
+                    <ul>
+                        <li>❌ Issuing orders to the wrong formation – always set <code>"formation"</code> to your own type.</li>
+                        <li>❌ Omitting required fields – include at least <code>response</code> and <code>orders</code> (even empty).</li>
+                        <li>❌ Writing long, narrative shouts – keep shouts to one short sentence.</li>
+                        <li>❌ Forgetting to update the tactical note – helps debugging and shows intelligent behaviour.</li>
+                        <li>✅ Always check terrain features and elevation before deciding movement.</li>
+                        <li>✅ Use <code>tactical_note</code> to explain your reasoning (especially for complex manoeuvres).</li>
+                    </ul>
+                    <div class="success">
+                        <p><strong>✅ Tip:</strong> If you want to test your custom rules, enable detailed logging in MCM (Debug → Enable Battle AI Logging) and inspect <code>logs/mod_log.txt</code> to see what prompts and responses are being sent.</p>
                     </div>
                 </div>
             </div>
