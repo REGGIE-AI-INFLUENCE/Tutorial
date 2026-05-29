@@ -403,32 +403,52 @@
         
         .toc ul {
             list-style: none;
-            padding-left: 20px;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
         }
         
         .toc li {
-            margin-bottom: 10px;
-            padding-left: 25px;
+            margin-bottom: 0;
+            padding-left: 0;
             position: relative;
             color: #E8D8B6;
         }
         
         .toc li::before {
-            content: '⚔️';
-            position: absolute;
-            left: 0;
-            top: 0;
+            content: none;
         }
         
         .toc a {
-            color: #E8D8B6;
+            color: #231906;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bold;
+            display: inline-block;
+            background: rgba(140, 95, 44, 0.55);
+            border: 2px solid #8C5F2C;
+            padding: 6px 18px;
+            border-radius: 25px;
+            transition: all 0.3s;
+            backdrop-filter: blur(6px);
+            letter-spacing: 0.4px;
+            box-shadow: 0 0 8px rgba(241, 196, 15, 0.25), 0 3px 8px rgba(0,0,0,0.3);
+            animation: toc-glow 2.5s ease-in-out infinite;
+            color: #E8D8B6;
+        }
+
+        @keyframes toc-glow {
+            0%   { box-shadow: 0 0 6px rgba(241, 196, 15, 0.3), 0 3px 8px rgba(0,0,0,0.3); }
+            50%  { box-shadow: 0 0 18px rgba(241, 196, 15, 0.75), 0 5px 12px rgba(0,0,0,0.4); }
+            100% { box-shadow: 0 0 6px rgba(241, 196, 15, 0.3), 0 3px 8px rgba(0,0,0,0.3); }
         }
         
         .toc a:hover {
-            color: #8C5F2C;
-            text-decoration: underline;
+            background: rgba(140, 95, 44, 0.9);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 28px rgba(241, 196, 15, 1), 0 8px 15px rgba(0,0,0,0.5);
         }
         
         ul, ol {
